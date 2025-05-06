@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const MOTORS = [
@@ -35,6 +36,12 @@ const MOTORS = [
 
 export default function ShowCase() {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const router = useRouter();
+
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        router.push('/question');
+    };
 
     const handlePrev = () => {
         setCurrentIndex((prev) => (prev - 1 + MOTORS.length) % MOTORS.length);
@@ -75,6 +82,7 @@ export default function ShowCase() {
                                 </div>
                                 <div className="flex justify-center">
                                     <button
+                                        onClick={handleClick}
                                         className="px-44 py-16 rounded-[229px] text-black text-8xl"
                                         style={{ background: "linear-gradient(45deg, #ffffff, #767676)" }}
                                     >
